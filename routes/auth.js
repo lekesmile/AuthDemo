@@ -10,6 +10,7 @@ router.get('/', (req, res) => {
     res.render('auth/home')
 })
 
+
 router.post('/',  async (req, res, next) => {
     try {
         let newUser = new db.User()
@@ -17,7 +18,7 @@ router.post('/',  async (req, res, next) => {
         newUser.password = req.body.password
 
         await newUser.save()
-        res.render('success')
+        res.redirect('/login')
 
     } catch (err) {
         return next(err)
@@ -41,24 +42,6 @@ router.get('/profile', (req, res) => {
     res.render('auth/profile')
 })
 
-// router.get('/register', (req, res) => {
-//     res.render('auth/signup')
-// })
-
-// router.post('/register', async (req, res, next) => {
-//     try {
-//         let newUser = new db.User()
-//         newUser.email = req.body.email
-//         newUser.password = req.body.password
-
-//         await newUser.save()
-//         res.redirect('/login')
-
-//     } catch (err) {
-//         return next(err)
-//     }
-
-// })
 
 
 
