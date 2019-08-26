@@ -19,10 +19,21 @@ passport.use('local', new LocalStrategy({
 },
     function (req, email, password, done) {
         db.User.findOne({ 'email': email }, function (err, user) {
-            if (err) { return done(err); }
-            if (!user) { console.log(user); return done(null, false); }
-            if (!user.comparePassword(password)) { return done(null, false); }
-            return done(null, user);
+            if (err) {
+                return done(null, false, {
+                    error: err.message
+                });
+            } if (!user) {
+                return done(null, false, {
+                    message: "Käyttäjää ei löytynyt antamallanne sähköpostiosoitteella."
+                });
+            } if (!user.comparePassword(password)) {
+                return done(null, false, {
+                    message: "Väärä salasana, tarkista isot ja pienet kirjaimet sekä, että caps lock näppäin ei ole päällä."
+                });
+            } else {
+                return done(null, user, req.flash("success", "Arvoisa " + user.email + ", tervetuloa takaisin ."));
+            }
         });
     }
 ));

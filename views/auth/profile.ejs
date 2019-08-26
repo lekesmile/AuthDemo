@@ -16,13 +16,41 @@
 </head>
 
 <body>
+    <aside>
+        <div class="container">
+            <div class="row">
+                <div class="col-10 col-offset-1">
+                    <% if(error && error.length > 0) { %>
+                    <div class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <p><%= error %></p>
+                    </div>
+                    <% } %>
+
+                    <% if(success && success.length > 0) { %>
+                    <div class="alert alert-success" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <p><%= success %></p>
+                    </div>
+                    <% } %>
+                    
+                </div>
+            </div>
+        </div>
+    </aside>
     <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
         <div class="col-md-6 px-0">
             <h1 class="display-4 font-italic">Registration Success</h1>
             <p class="lead my-3">
                   Welcome <%= user.email %>
             </p>
-            
+            <form action="/profile" method="POST">
+            <button type="submit" class="primary btn-primary">Logout</button>
+            </form>
         </div>
     </div>
   

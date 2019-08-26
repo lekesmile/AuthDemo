@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const passport = require('passport')
 const session = require('express-session')
 const ejs = require('ejs')
+const flash = require('express-flash')
 
 
 
@@ -35,11 +36,15 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
+app.use(flash())
+
 
 
 app.use(function (req, res, next) {
     res.locals.user = req.user
     console.log(req.user)
+    res.locals.error = req.flash('error')
+    res.locals.success = req.flash('success')
     next()
 })
 

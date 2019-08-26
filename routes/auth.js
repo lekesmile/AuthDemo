@@ -43,6 +43,12 @@ router.get('/profile', (req, res) => {
 })
 
 
+// Logout route
+
+router.post('/profile', (req, res)=>{
+    res.render('auth/logout')
+})
+
 
 
 
